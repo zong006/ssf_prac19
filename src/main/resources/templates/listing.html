@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Listing</title>
+</head>
+<body>
+    <div>
+        <p>Select Category of progress</p>
+    </div>
+    <!--  -->
+    <form th:action="@{/}" method="post">
+        <input type="checkbox" name="statuses" th:each="status : ${statuses}" th:value="${status}" th:text="${status}">
+        <button type="submit">Submit</button>
+    </form>
+    <!--  -->
+    <br>
+    <!--  -->
+    <form th:action="@{/add}" method="get">
+        <button type="submit">Create New Todo</button>
+    </form>
+    <!--  -->
+    <br>
+    <!--  -->
+    <div>All Todo Items</div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Due DateD</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+        <tr th:each="todo : ${todoList}">
+            <td th:text="${todo.id}"></td>
+            <td th:text="${todo.name}"></td>
+            <td th:text="${todo.description}"></td>
+            <td th:text="${#dates.format(todo.dueDate, 'E, dd-MM-yyyy')}"></td>
+            <td th:text="${todo.priority}"></td>
+            <td th:text="${todo.status}"></td>
+            <td th:text="${#dates.format(todo.createDate, 'E, dd-MM-yyyy')}"></td>
+            <td th:text="${#dates.format(todo.updateDate, 'E, dd-MM-yyyy')}"></td>
+        </tr>
+    </table>
+    
+</body>
+</html>

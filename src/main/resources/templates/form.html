@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Todo</title>
+</head>
+<body>
+    <br><br><br>
+    <!-- this Form requires a Day19model object to function -->
+     <!-- thus the controller needs to set up an attribute of Day19model type -->
+    <form th:action="@{/add}" method="post" th:object="${todo}">
+        <div>
+            <div>
+                <label for="name">Name: </label>
+                <input type="text" id="name" th:field="*{name}" placeholder="Name">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error"></p>
+            </div>
+            <br>
+            <div>
+                <label for="description">Description: </label>
+                <input type="text" id="description" th:field="*{description}" placeholder="To-do description">
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="error"></p>
+            </div>
+            <br>
+            <div>
+                <label for="dueDate">Due Date: </label>
+                <input type="date" id="dueDate" th:field="*{dueDate}" >
+                <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}" th:errorclass="error"></p>
+            </div>
+            <br>
+            <div>
+                <label for="priority">Priority: </label>
+                <select name="priority"> <!-- the select creates the drop down -->
+                    <option th:each="priority : ${priorityOptions}" th:field="*{priority}" th:value="${priority}" th:text="${priority}"></option>
+                </select>
+                <!-- <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></p> -->
+            </div>
+            <br>
+            <div>
+                <label for="status">Status: </label>
+                <select name="status"> <!-- the <select> creates the drop down -->
+                    <option th:each="status : ${statusOptions}" th:field="*{status}" th:value="${status}" th:text="${status}"></option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="createDate">Created Date</label>
+                <input type="date" id="createDate" name="createDate" th:field="*{createDate}" >
+            </div>
+            <br>
+            <div>
+                <label for="updateDate">Updated Date</label>
+                <input type="date" id="updateDate" th:field="*{updateDate}" >
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Create">
+            </div>
+        </div>
+    </form>
+    <br><br><br>
+    <a th:href="@{/}">Back to Home</a>
+</body>
+</html>
